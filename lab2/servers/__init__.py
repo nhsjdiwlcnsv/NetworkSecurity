@@ -1,3 +1,5 @@
+import os
+from typing import Any
 from lab2 import Listener, Sender
 
 
@@ -6,10 +8,14 @@ class Server(Listener, Sender):
         super().__init__()
 
         self._server_id: int = server_id
-        self.received_data: str = ""
+        self.received_data: Any = ""
 
-    def receive(self, msg: str) -> None:
+    @property
+    def server_id(self) -> int:
+        return self._server_id
+
+    def keygen(self) -> str:
+        return os.urandom(8).hex().upper()
+
+    def receive(self, msg: Any) -> None:
         self.received_data = msg
-
-    def _encrypt(self, msg: str) -> str:
-        return msg
