@@ -91,7 +91,7 @@ class FileEncryptor:
 
 
 if __name__ == "__main__":
-    file_enc = FileEncryptor(TEST_FILE_PATH, 'r', 'vigenere', 'amogstvo')
+    file_enc = FileEncryptor(TEST_FILE_PATH, 'r', 'vigenere', 'asdjn')
 
     with file_enc as fe:
         data = fe.read()
@@ -99,5 +99,6 @@ if __name__ == "__main__":
     encr = file_enc.encrypt(data, reverse=False)
     decr = file_enc.encrypt(encr, reverse=True)
 
-    print(encr)
-    print(decr)
+    print("Encrypted text:", encr, sep="\n")
+    print()
+    print("Decrypted text:", decr, sep="\n")
