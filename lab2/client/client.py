@@ -31,7 +31,7 @@ class Client(Listener, Sender):
         elif isinstance(msg["from"], TicketGrantingServer):
             self.__send_to_ss = self._process_ticket_granting_server_msg(msg)
         elif isinstance(msg["from"], ServiceServer):
-            self.ss_validity: bool = (self._process_service_server_msg(msg) - 1 == self.__aut_2[1])
+            self.ss_validity: bool = (self._process_service_server_msg(msg) == self.__aut_2[1])
 
     def connect(self, server: ServiceServer, aux_servers: tuple[AuthenticationServer, TicketGrantingServer]) -> bool:
         self.__server = server
@@ -43,9 +43,9 @@ class Client(Listener, Sender):
         self.send(self.__server, self.__send_to_ss)  # Steps 5 and 6
 
         if self.ss_validity:
-            print(f"Connection status: {colorama.Fore.GREEN + 'success'}")
+            print(f"Connection status: {colorama.Fore.GREEN + 'success'}.")
         else:
-            print(f"Connection status: {colorama.Fore.RED + 'failure'}")
+            print(f"Connection status: {colorama.Fore.RED + 'failure'}.")
 
     def _process_auth_server_msg(self, msg: dict[Sender, Any]) -> tuple:
         data: tuple[str, ...] = decrypt(msg["message"], self.key)
